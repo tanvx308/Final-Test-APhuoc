@@ -4,4 +4,6 @@ import com.fis.java.finaltest.entity.Person;
 
 public interface PersonService {
     Person findPersonById(Long id);
+
+    Person findByUsername(String username);
 }

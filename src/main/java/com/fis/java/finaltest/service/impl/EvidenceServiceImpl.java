@@ -3,6 +3,7 @@ package com.fis.java.finaltest.service.impl;
 import com.fis.java.finaltest.entity.Evidence;
 import com.fis.java.finaltest.exception.ResourceNotFoundException;
 import com.fis.java.finaltest.repo.EvidenceRepo;
+import com.fis.java.finaltest.service.CriminalCaseService;
 import com.fis.java.finaltest.service.EvidenceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class EvidenceServiceImpl implements EvidenceService {

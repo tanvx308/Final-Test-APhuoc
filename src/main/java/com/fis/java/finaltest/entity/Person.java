@@ -1,18 +1,21 @@
 package com.fis.java.finaltest.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "person")
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Person extends AbstractEntity{
+    @Column(unique = true)
     private String username;
 
     private String firstName;
@@ -22,4 +25,7 @@ public class Person extends AbstractEntity{
     private String password;
 
     private LocalDateTime hiringDate;
+
+    @OneToOne(mappedBy = "person")
+    private Detective detective;
 }

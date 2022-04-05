@@ -1,5 +1,6 @@
 package com.fis.java.finaltest.service;
 
+import com.fis.java.finaltest.entity.CriminalCase;
 import com.fis.java.finaltest.entity.Detective;
 import org.springframework.data.domain.Pageable;
 
@@ -15,4 +16,8 @@ public interface DetectiveService {
     void deleteDetective(Long id);
 
     Detective findDetectiveById(Long id);
+
+    boolean existsByPerson_Username(String username);
+
+    Detective findByPerson_Username(String username);
 }

@@ -1,6 +1,7 @@
 package com.fis.java.finaltest.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Evidence extends AbstractEntity{
     @ManyToOne
     @JoinColumn(name = "case_id")

@@ -65,4 +65,42 @@ public class CriminalCaseController {
         return new ResponseEntity<CriminalCase>(criminalCaseService.findCriminalCaseById(criminalCaseId),
                 HttpStatus.OK);
     }
+
+    // endpoint to list of criminal cases with the specified case status
+    @GetMapping("/criminal-case/status/{status}")
+    public ResponseEntity<?> findCriminalCaseByStatus(@PathVariable("status") Optional<String> status,
+                                                                       @RequestParam("page") Optional<Integer> page,
+                                                                       @RequestParam("size") Optional<Integer> size){
+        if(status.isPresent()){
+            try {
+                CriminalCase.CaseStatus caseStatus = CriminalCase.CaseStatus.valueOf(status.get());
+                Pageable pageable = PageRequest.of(page.orElse(1) - 1, size.orElse(6));
+                return new ResponseEntity<>(criminalCaseService.findCriminalCaseByStatus(caseStatus, pageable), HttpStatus.OK);
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Status is not Case Status.");
+            }
+        }else{
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Status is required.");
+        }
+    }
+
+    // list of evidences of the specified criminal number
+    @GetMapping("/evidence-of-criminal/{number}")
+    public ResponseEntity<?> findEvidenceByCriminalWithNumber(@PathVariable("number") String number,
+                                                              @RequestParam("page") Optional<Integer> page,
+                                                              @RequestParam("size") Optional<Integer> size){
+        Pageable pageable = PageRequest.of(page.orElse(1) - 1, size.orElse(6));
+        return new ResponseEntity<>(criminalCaseService.findEvidenceByCriminalWithNumber(number, pageable),
+                HttpStatus.OK);
+    }
+
+    //list of criminal cases of the specified username
+    @GetMapping("/criminal-case-of-detctive/{username}")
+    public ResponseEntity<?> findByDetectiveWithUsername(@PathVariable("username")String username,
+                                                         @RequestParam("page") Optional<Integer> page,
+                                                         @RequestParam("size") Optional<Integer> size){
+        Pageable pageable = PageRequest.of(page.orElse(1) - 1, size.orElse(6));
+        return new ResponseEntity<>(criminalCaseService.findByDetectiveWithUsername(username, pageable),
+                HttpStatus.OK);
+    }
 }

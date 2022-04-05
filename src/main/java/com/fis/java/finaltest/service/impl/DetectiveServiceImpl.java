@@ -1,5 +1,6 @@
 package com.fis.java.finaltest.service.impl;
 
+import com.fis.java.finaltest.entity.CriminalCase;
 import com.fis.java.finaltest.entity.Detective;
 import com.fis.java.finaltest.exception.ResourceNotFoundException;
 import com.fis.java.finaltest.repo.DetectiveRepo;
@@ -51,5 +52,15 @@ public class DetectiveServiceImpl implements DetectiveService {
         }else{
             throw new ResourceNotFoundException("Detective", "Id", String.valueOf(id));
         }
+    }
+
+    @Override
+    public boolean existsByPerson_Username(String username) {
+        return detectiveRepo.existsByPerson_Username(username);
+    }
+
+    @Override
+    public Detective findByPerson_Username(String username) {
+        return detectiveRepo.findByPerson_Username(username);
     }
 }

@@ -1,7 +1,9 @@
 package com.fis.java.finaltest.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +15,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Detective extends AbstractEntity{
     public enum Rank{
         TRAINEE, JUNIOR, SENIOR, INSPECTOR, CHIEF_INSPECTOR
@@ -36,6 +39,7 @@ public class Detective extends AbstractEntity{
     private EmploymentStatus status;
 
     @ManyToMany(mappedBy = "assigned", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<CriminalCase> criminalCases;
 
     @OneToMany(mappedBy = "detective", fetch = FetchType.LAZY)

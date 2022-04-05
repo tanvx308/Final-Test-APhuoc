@@ -1,5 +1,6 @@
 package com.fis.java.finaltest.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ public class CriminalCase extends AbstractEntity{
         SUBMITTED, UNDER_INVESTIGATION, IN_COURT, CLOSED, DISMISSED, COLD
     }
 
+    @Column(unique = true)
     private String number;
 
     @Enumerated(EnumType.STRING)
@@ -36,12 +38,15 @@ public class CriminalCase extends AbstractEntity{
     private String notes;
 
     @OneToMany(mappedBy = "criminalCase", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<Evidence> evidenceSet;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "lead_investigator")
     private Detective leadInvestigator;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "working_detective_case",

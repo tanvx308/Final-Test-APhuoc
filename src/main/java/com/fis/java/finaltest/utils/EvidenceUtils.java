@@ -13,6 +13,9 @@ public class EvidenceUtils {
         evidence.setItemName(evidenceDto.getItemName());
         evidence.setNotes(evidenceDto.getNotes());
         evidence.setArchived(evidenceDto.getArchived());
+        evidence.setCriminalCase(evidenceDto.getCriminalCase());
+        evidence.setStorage(evidenceDto.getStorage());
+        evidence.setTrackEntries(evidenceDto.getTrackEntries());
         return evidence;
     }
 }
